@@ -440,7 +440,7 @@ footer .social-icons i:hover {
 </form>
       </div>
       
-      <a href="<%= request.getContextPath() %>/pages/editprofile.jsp"><i class="fas fa-user-circle" style="font-size: 50px; color: #000;"></i></a>
+      <a href="<%= request.getContextPath() %>/pages/customerProfile.jsp"><i class="fas fa-user-circle" style="font-size: 50px; color: #000;"></i></a>
       <a href="cart.jsp" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
     </div>
   </nav>
@@ -508,7 +508,7 @@ footer .social-icons i:hover {
 <section id="new-arrivals" class="section-box">
   <h2><a href="<%=request.getContextPath()%>/new-in.html">New Arrivals</a></h2>
   <div>
-    <a href="<%=request.getContextPath()%>/new-in.html">
+    <a href="<%=request.getContextPath()%>/pages/productdetails.jsp">
       <img src="<%=request.getContextPath()%>/images/sari/1.jpeg" alt="New Arrival 1"><br>Plain Border Saree
     </a>
     <a href="<%=request.getContextPath()%>/new-in.html">

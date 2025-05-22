@@ -3,13 +3,12 @@
 <%@ page import="model.Product" %>
 <%
     String categoryIdParam = request.getParameter("category_id");
-    int categoryId = 0; // default = show categories
-    
+    int categoryId = 0;
     if (categoryIdParam != null) {
         try {
             categoryId = Integer.parseInt(categoryIdParam);
         } catch (NumberFormatException e) {
-            categoryId = 0; // fallback to default if invalid number
+            categoryId = 0;
         }
     }
     List<Product> products = (List<Product>) request.getAttribute("products");
@@ -23,7 +22,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Pacifico&family=Montserrat:wght@400;600&family=Dancing+Script&display=swap" rel="stylesheet">
 
   <style>
-    /* Your existing CSS untouched */
     * { box-sizing: border-box; }
     body {
       font-family: 'Lora', serif;
@@ -33,6 +31,7 @@
       padding: 0;
       padding-top: 80px;
     }
+
     nav {
       background: linear-gradient(to right, #ffffff, #ffffff);
       display: flex;
@@ -47,6 +46,7 @@
       width: 100%;
       z-index: 1000;
     }
+
     .brand {
       font-size: 2.2rem;
       font-weight: bold;
@@ -55,7 +55,9 @@
       gap: 5px;
       font-family: 'Arial', serif;
     }
+
     .brand img { height: 100px; }
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -63,20 +65,30 @@
       font-size: 1.2rem;
       font-weight: bold;
     }
+
     .nav-links a {
       color: #000000;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: #258575; }
-    .search-bar { position: relative; }
+
+    .nav-links a:hover {
+      color: #258575;
+    }
+
+    .search-bar {
+      position: relative;
+    }
+
     .search-bar input {
       padding: 6px 20px;
       border: 1px solid black;
       border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
       color: black;
     }
+
     .search-bar i {
       position: absolute;
       right: 10px;
@@ -84,33 +96,57 @@
       transform: translateY(-50%);
       color: #1d1c1b;
     }
+
     .login-box, .cart-icon {
       padding: 6px 12px;
       border: 1px solid black;
       border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
       color: black;
-      transition: background-color 0.3s;
     }
+
     .login-box:hover, .cart-icon:hover {
       background-color: #f0e0c6;
       color: #bdc3a8;
       cursor: pointer;
     }
+
     h1 {
       text-align: center;
       padding: 10px;
       font-size: 36px;
       border-bottom: 1px solid #ddd;
     }
-    .ethnics-category {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      background-color: #f0e0c6;
-    }
-    .category-card, .product-card {
+
+   .ethnics-category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; /* force equal height */
+  gap: 20px;
+  padding: 20px;
+  background-color: #f0e0c6;
+}
+
+.product-card {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+  text-decoration: none;
+  color: inherit;
+  flex-grow: 1;
+}
+
+    .category-card {
       width: 300px;
       height: 400px;
       border: 1px solid #ccc;
@@ -127,20 +163,24 @@
       color: inherit;
       padding: 10px;
     }
+
     .category-card:hover, .product-card:hover {
       transform: translateY(-8px);
     }
+
     .category-card img, .product-card img {
       width: 100%;
       height: 70%;
       object-fit: cover;
       flex-grow: 1;
     }
+
     .category-card h3, .product-card h3 {
       margin: 5px 0;
       font-size: 18px;
       font-weight: bold;
     }
+
     .product-card button {
       margin: 5px;
       padding: 8px 12px;
@@ -151,7 +191,11 @@
       cursor: pointer;
       font-weight: bold;
     }
-    .product-card button:hover { background-color: #1a5f4e; }
+
+    .product-card button:hover {
+      background-color: #1a5f4e;
+    }
+
     @media (max-width: 768px) {
       .category-card, .product-card {
         width: 45%;
@@ -163,9 +207,9 @@
   <script>
     function addToCart(productName) {
       alert(productName + " added to cart!");
-      // Optional: implement real backend logic here
     }
-    function viewDetails(name, image) {
+
+    function BuyNow(name, image) {
       window.location.href = "productdetails.jsp?name=" + encodeURIComponent(name) + "&image=" + encodeURIComponent(image);
     }
   </script>
@@ -225,14 +269,16 @@
         for (Product p : products) {
     %>
       <div class="product-card">
-        <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" alt="<%=p.getName()%>">
-        <h3><%=p.getName()%></h3>
+  <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" alt="<%=p.getName()%>">
+  <div style="min-height: 50px;">
+    <h3><%=p.getName()%></h3>
+  </div>
         <form action="cartservlet" method="post" style="margin: 5px;">
-    	<input type="hidden" name="productId" value="<%= p.getProduct_id() %>">
-    	<input type="hidden" name="quantity" value="1">
-    	<button type="submit" style="background-color: #258575; color: white; border: none; border-radius: 8px; padding: 8px 12px; font-weight: bold; cursor: pointer;">Add to Cart</button>
-		</form>
-        <button onclick="viewDetails('<%=p.getName()%>', '<%=request.getContextPath()%>/<%=p.getImage()%>')">View Details</button>
+          <input type="hidden" name="productId" value="<%= p.getProduct_id() %>">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit">Add to Cart</button>
+        </form>
+        <button onclick="BuyNow('<%=p.getName()%>', '<%=request.getContextPath()%>/<%=p.getImage()%>')">Buy Now</button>
       </div>
     <%
         }

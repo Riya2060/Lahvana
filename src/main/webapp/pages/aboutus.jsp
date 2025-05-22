@@ -252,7 +252,7 @@
         <input type="text" placeholder="Search..." />
         <i class="fas fa-search"></i>
       </div>
-      <a href="#login" class="login-box">Login</a>
+      <a href="login.jsp" class="login-box">Login</a>
       <a href="#cart" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
     </div>
   </nav>
@@ -287,27 +287,27 @@
       <h2>Meet Our Team</h2>
       <div class="team">
         <div class="team-member">
-          <img src="" alt="Riya Nepali">
+          <img src="<%=request.getContextPath()%>/images/aboutus/IMG_9949.jpeg" alt="Riya Nepali" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
           <h3>Riya Nepali</h3>
           <p><strong>Founder & CEO</strong><br>Leads the vision and growth of our platform with passion and purpose.</p>
         </div>
         <div class="team-member">
-          <img src="" alt="Asmita Rana">
+           <img src="<%=request.getContextPath()%>/images/aboutus/IMG_6727.JPG" alt="Asmita Rana" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
           <h3>Asmita Rana</h3>
           <p><strong>Creative Director</strong><br>Curates our ethnic collections to ensure style and authenticity.</p>
         </div>
         <div class="team-member">
-          <img src="" alt="Kabita Rana">
+         <img src="<%=request.getContextPath()%>/images/aboutus/IMG_1533.JPG" alt="Kabita Rana" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
           <h3>Kabita Rana</h3>
           <p><strong>Operations Manager</strong><br>Oversees logistics and ensures smooth customer experiences.</p>
         </div>
         <div class="team-member">
-          <img src="" alt="Sunita Poudel">
+          <img src="<%=request.getContextPath()%>/images/aboutus/IMG_3823.jpg" alt="Sunita Poudel" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
           <h3>Sunita Poudel</h3>
           <p><strong>Customer Experience Lead</strong><br>Helps customers find the perfect outfits and service.</p>
         </div>
         <div class="team-member">
-          <img src="" alt="Kripa Pandey">
+          <img src="<%=request.getContextPath()%>/images/aboutus/IMG_9968.jpeg" alt="Kripa Pandey" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
           <h3>Kripa Pandey</h3>
           <p><strong>Marketing & Outreach</strong><br>Spreads our brand story and style across communities.</p>
         </div>

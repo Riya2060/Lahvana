@@ -1,117 +1,128 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.CartItem" %>
 <%@ page import="DAO.CartDAO" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    // Ensure the user is logged in
+    Integer userId = (Integer) session.getAttribute("userId");
+    if (userId == null) {
+        response.sendRedirect("/pages/login.jsp");
+        return;
+    }
+
+    List<CartItem> cartItems = null;
+    double total = 0.0;
+
+    try {
+        CartDAO cartDAO = new CartDAO();
+        cartItems = cartDAO.getCartItemsByUserId(userId);
+
+        for (CartItem item : cartItems) {
+            total += item.getPrice() * item.getQuantity();
+        }
+
+    } catch (SQLException | ClassNotFoundException e) {
+        out.println("<p>Error loading cart items: " + e.getMessage() + "</p>");
+    }
+%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Your Shopping Cart</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>My Cart</title>
     <style>
-        .cart-container {
-            max-width: 900px;
-            margin: 120px auto 40px;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        body {
             font-family: Arial, sans-serif;
+            padding: 30px;
         }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding: 15px 0;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-        .cart-item img {
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2d4733;
+            color: white;
+        }
+
+        img {
             width: 100px;
-            height: 100px;
-            object-fit: cover;
-            margin-right: 20px;
-            border-radius: 5px;
+            height: auto;
         }
-        .cart-item-details {
-            flex-grow: 1;
-        }
-        .cart-item-details h3 {
-            margin: 0 0 8px 0;
-        }
-        .cart-item-details p {
-            margin: 4px 0;
-        }
-        .cart-total {
+
+        .total {
+            font-size: 18px;
             font-weight: bold;
             text-align: right;
-            margin-top: 25px;
-            font-size: 18px;
+            margin-top: 20px;
         }
-        .purchase-btn {
-            background-color: #28a745;
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #2d4733;
             color: white;
-            padding: 12px;
-            width: 100%;
+            text-decoration: none;
             border: none;
-            font-size: 18px;
-            border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
-            transition: background-color 0.3s ease;
         }
-        .purchase-btn:hover {
-            background-color: #218838;
+
+        .btn:hover {
+            background-color: #3a5b42;
         }
     </style>
 </head>
 <body>
 
-<%
-    if (session == null || session.getAttribute("user_id") == null) {
-        response.sendRedirect("login.jsp");
-        return;
-    }
+    <h1>Your Shopping Cart</h1>
 
-    int userId = (Integer) session.getAttribute("user_id");
-    double total = 0.0;
-    List<CartItem> cartItems = null;
+    <% if (cartItems != null && !cartItems.isEmpty()) { %>
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Product</th>
+                    <th>Price (per item)</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (CartItem item : cartItems) { %>
+                    <tr>
+                        
+                        <td><%= item.getProductName() %></td>
+                        <td>Rs. <%= item.getPrice() %></td>
+                        <td><%= item.getQuantity() %></td>
+                        <td>Rs. <%= item.getPrice() * item.getQuantity() %></td>
+                        
+                      
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
 
-    try {
-        CartDAO cartDAO = new CartDAO();
-        cartItems = cartDAO.getCartItemsByUserId(userId);
-    } catch (Exception e) {
-        out.println("<div class='container text-danger'>Error loading cart items: " + e.getMessage() + "</div>");
-    }
-%>
-
-<div class="cart-container">
-    <h2>Your Shopping Cart</h2>
-
-    <% if (cartItems == null || cartItems.isEmpty()) { %>
-        <p>Your cart is empty.</p>
-    <% } else {
-        for (CartItem item : cartItems) {
-            total += item.getPrice() * item.getQuantity();
-    %>
-        <div class="cart-item">
-            <img src="<%= request.getContextPath() + "/photos/" + item.getImagePath() %>" alt="<%= item.getProductName() %>">
-            <div class="cart-item-details">
-                <h3><%= item.getProductName() %></h3>
-                <p>Price: ₹<%= String.format("%.2f", item.getPrice()) %></p>
-                <p>Quantity: <%= item.getQuantity() %></p>
-            </div>
-        </div>
-    <% } %>
-
-        <div class="cart-total">
-            Total: ₹<%= String.format("%.2f", total) %>
+        <div class="total">
+            Grand Total: Rs. <%= total %>
         </div>
 
-        <form action="checkoutServlet" method="post">
-            <button class="purchase-btn" type="submit">Proceed to Checkout</button>
+        <br/>
+        <form action="checkout.jsp">
+            <button class="btn" type="submit">Proceed to Checkout</button>
         </form>
+
+    <% } else { %>
+        <p>Your cart is empty.</p>
     <% } %>
-</div>
 
 </body>
 </html>

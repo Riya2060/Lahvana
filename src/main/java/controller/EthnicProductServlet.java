@@ -19,7 +19,12 @@ import model.Product;
 
 @WebServlet("/ethnicsproducts")
 public class EthnicProductServlet extends HttpServlet {
-	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        int categoryId = Integer.parseInt(request.getParameter("category_id"));
 
 	        productDAO productDao = new productDAO();

@@ -7,18 +7,16 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 
 import DAO.UserDAO;
 import model.User;
 
-@WebServlet("/editprofile")
-public class editprofile extends HttpServlet {
+@WebServlet("/profile")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 2 * 1024 * 1024) // 2MB
+public class CustomerProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserDAO userDAO;
 

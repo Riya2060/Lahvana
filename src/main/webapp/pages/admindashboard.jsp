@@ -11,21 +11,29 @@
 <body class="bg-light">
 
 <div class="d-flex min-vh-100">
+<%
+  // Get the current URI for active link highlighting
+  String currentURI = request.getRequestURI();
+%>
   
-  <!-- Sidebar -->
-  <aside class="bg-white border-end p-3" style="width: 250px; height: 100vh;">
+<aside class="bg-white border-end p-3" style="width: 250px; height: 100vh;">
     <h2 class="text-success fw-bold">Lehvana</h2>
     <ul class="nav flex-column mt-4">
-      <li class="nav-item"><a href="dashboard.jsp" class="nav-link text-dark">Dashboard</a></li>
-      <li class="nav-item"><a href="account.jsp" class="nav-link text-dark">Account</a></li>
-      <li class="nav-item"><a href="users.jsp" class="nav-link text-dark">Users</a></li>
-      <li class="nav-item"><a href="product.jsp" class="nav-link text-dark">Products</a></li>
-      <li class="nav-item"><a href="orders.jsp" class="nav-link text-dark">Orders</a></li>
-      <li class="nav-item"><a href="reports.jsp" class="nav-link text-dark">Reports</a></li>
-      <li class="nav-item"><a href="logout.jsp" class="nav-link text-dark">Logout</a></li>
+        <li class="nav-item"><a href="admindashboard.jsp" class="nav-link text-dark">Dashboard</a></li>
+        <li class="nav-item"><a href="editprofiles.jsp" class="nav-link text-dark">Account</a></li>
+		<li class="sidebar__item">
+	    <li class="nav-item">
+		  <a href="<%= request.getContextPath() %>/user-list" 
+		     class="nav-link text-dark<%= currentURI.endsWith("/user-list.jsp") ? " active" : "" %>">
+		    Users
+		  </a>
+		</li>
+        <li class="nav-item"><a href="product.jsp" class="nav-link text-dark">Products</a></li>
+        <li class="nav-item"><a href="orders.jsp" class="nav-link text-dark">Orders</a></li>
+        <li class="nav-item"><a href="reports.jsp" class="nav-link text-dark">Reports</a></li>
+        <li class="nav-item"><a href="logout.jsp" class="nav-link text-dark">Logout</a></li>
     </ul>
-  </aside>
-
+</aside>
   <!-- Main Content -->
   <main class="flex-grow-1 p-4">
     <!-- Dashboard Section -->

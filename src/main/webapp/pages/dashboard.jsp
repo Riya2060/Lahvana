@@ -486,16 +486,16 @@ footer .social-icons i:hover {
 <section id="categories" class="section-box">
   <h2><a href="<%=request.getContextPath()%>/ethnics.html">Categories</a></h2>
   <div>
-    <a href="<%=request.getContextPath()%>/ethnics.html">
+    <a href="<%=request.getContextPath()%>/ethnicsproducts?category_id=1">
       <img src="<%=request.getContextPath()%>/images/sari/17.jpg" alt="Saree"><br>Saree
     </a>
-    <a href="<%=request.getContextPath()%>/ethnics.html">
+    <a href="<%=request.getContextPath()%>/ethnicsproducts?category_id=2">
       <img src="<%=request.getContextPath()%>/images/lehenga/11.jpg" alt="Lehenga"><br>Lehenga
     </a>
-    <a href="<%=request.getContextPath()%>/ethnics.html">
+    <a  href="<%=request.getContextPath()%>/ethnicsproducts?category_id=4">
       <img src="<%=request.getContextPath()%>/images/Gown/7.jpg" alt="Gown"><br>Gown
     </a>
-    <a href="<%=request.getContextPath()%>/ethnics.html">
+    <a href="<%=request.getContextPath()%>/ethnicsproducts?category_id=3">
       <img src="<%=request.getContextPath()%>/images/kutha/1.avif" alt="Kurtha"><br>Kurtha
     </a>
     
@@ -507,7 +507,7 @@ footer .social-icons i:hover {
 <section id="new-arrivals" class="section-box">
   <h2><a href="<%=request.getContextPath()%>/new-in.html">New Arrivals</a></h2>
   <div>
-    <a href="<%=request.getContextPath()%>/new-in.html">
+    <a href="<%=request.getContextPath()%>/pages/productdetails.jsp">
       <img src="<%=request.getContextPath()%>/images/sari/1.jpeg" alt="New Arrival 1"><br>Plain Border Saree
     </a>
     <a href="<%=request.getContextPath()%>/new-in.html">

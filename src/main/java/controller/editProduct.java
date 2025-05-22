@@ -19,7 +19,12 @@ import java.io.IOException;
 )
 public class editProduct extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             // 1. Get all form fields
             int product_id = Integer.parseInt(request.getParameter("product_id"));
