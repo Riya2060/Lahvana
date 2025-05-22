@@ -21,14 +21,14 @@
             margin: 0;
             padding: 30px;
         }
-		.profile-details {
-		    display: flex;
-		    flex-direction: column;
-		    align-items: center;
-		    text-align: center;
-		    margin-top: 20px;
-		}
-		
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
         .container {
             max-width: 800px;
             margin: auto;
@@ -127,7 +127,6 @@
 <body>
 
 <!-- PROFILE VIEW -->
-<!-- PROFILE VIEW -->
 <div id="profileView" class="container">
     <h2>Customer Profile</h2>
 
@@ -141,7 +140,7 @@
              class="profile-pic" alt="Profile Photo">
     </div>
 
-    <!-- ✅ New wrapper for details -->
+    <!-- Profile details -->
     <div class="profile-details">
         <p><strong>First Name:</strong> <%= user.getFirst_name() %></p>
         <p><strong>Last Name:</strong> <%= user.getLast_name() %></p>
@@ -154,10 +153,10 @@
     </div>
 
     <div class="buttons">
-    <button onclick="toggleEditForm()">Edit Profile</button>
-    <button onclick="window.location.href='logout.jsp'">Logout</button>
+        <button onclick="toggleEditForm()">Edit Profile</button>
+        <button onclick="window.location.href='logout.jsp'">Logout</button>
+    </div>
 </div>
-
 
 <!-- EDIT FORM VIEW -->
 <div id="editFormContainer" class="container" style="display: none;">
@@ -238,7 +237,6 @@
         </div>
 
         <div class="form-actions">
-       
             <button type="submit" id="saveBtn" disabled>Save Changes</button>
             <button type="button" onclick="cancelEdit()">Cancel</button>
         </div>
@@ -315,16 +313,18 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-        if ("<%= error != null %>" === "true") {
+        // Open edit form automatically if error exists
+        const errorExists = <%= (error != null) ? "true" : "false" %>;
+        if (errorExists) {
             toggleEditForm();
         }
 
-        // Validate on every input and when the page is ready
+        // Add input listeners for validation
         document.querySelectorAll("#editProfileForm input, #editProfileForm select").forEach(input => {
             input.addEventListener("input", validateAll);
         });
 
-        validateAll(); // Run validation immediately on page load
+        validateAll(); // Initial validation
     });
 </script>
 </body>

@@ -73,7 +73,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Price ($)</th>
+                        <th>Price Rs </th>
                         <th>Quantity</th>
                         <th>Image</th>
                         <th>Category ID</th>
@@ -97,7 +97,9 @@
                         <td><%= p.getCategory_id() %></td>
                         <td>
                             <a href="<%= request.getContextPath() + "/pages/editProduct.jsp?id=" + p.getProduct_id() %>" class="btn btn-success btn-sm mb-1">Edit</a>
-                            <a href="<%= request.getContextPath() + "/DeleteProductServlet?product_id=" + p.getProduct_id() %>" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="<%= request.getContextPath() + "/DeleteProductServlet?product_id=" + p.getProduct_id() %>"
+  							 class="btn btn-danger btn-sm"
+  							 onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
                         </td>
                     </tr>
                     <%

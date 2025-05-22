@@ -43,25 +43,25 @@
         <div class="col-md-3">
           <div class="bg-white p-3 rounded shadow-sm">
             <p class="text-muted mb-1">Total Orders</p>
-            <h5 class="text-success">1,234</h5>
+            <h5 class="text-success">9</h5>
           </div>
         </div>
         <div class="col-md-3">
           <div class="bg-white p-3 rounded shadow-sm">
             <p class="text-muted mb-1">Total Revenue</p>
-            <h5 class="text-success">$12,345</h5>
+            <h5 class="text-success">Rs 12,345</h5>
           </div>
         </div>
         <div class="col-md-3">
           <div class="bg-white p-3 rounded shadow-sm">
             <p class="text-muted mb-1">Total Customers</p>
-            <h5 class="text-success">567</h5>
+            <h5 class="text-success">5</h5>
           </div>
         </div>
         <div class="col-md-3">
           <div class="bg-white p-3 rounded shadow-sm">
             <p class="text-muted mb-1">Items Ordered</p>
-            <h5 class="text-success">3,890</h5>
+            <h5 class="text-success">33</h5>
           </div>
         </div>
       </div>
@@ -94,17 +94,17 @@
           <tbody>
             <tr>
               <td>Red Gown</td>
-              <td>$25</td>
+              <td>Rs 2,500</td>
               <td>Party Wear</td>
               <td>78</td>
-              <td>$1,950</td>
+              <td>Rs 1,950</td>
             </tr>
             <tr>
               <td>Sherwani</td>
-              <td>$30</td>
+              <td>Rs 3,500</td>
               <td>Traditional</td>
               <td>50</td>
-              <td>$1,500</td>
+              <td>Rs 1,500</td>
             </tr>
           </tbody>
         </table>

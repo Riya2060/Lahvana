@@ -9,13 +9,9 @@ import java.io.IOException;
 
 @WebServlet("/DeleteProductServlet")
 public class DeleteProduct extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         deleteProduct(request, response);
     }
 
@@ -26,13 +22,15 @@ public class DeleteProduct extends HttpServlet {
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int product_id = Integer.parseInt(request.getParameter("product_id"));
+            System.out.println("Deleting Product ID: " + product_id); // debug
 
             productDAO dao = new productDAO();
             boolean result = dao.deleteProduct(product_id);
+
             HttpSession session = request.getSession();
 
             if (result) {
-            	session.setAttribute("message", "Product deleted successfully!");
+                session.setAttribute("message", "Product deleted successfully!");
                 response.sendRedirect(request.getContextPath() + "/pages/product.jsp");
             } else {
                 request.setAttribute("errorMessage", "Error deleting product.");

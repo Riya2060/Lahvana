@@ -38,7 +38,7 @@ public class Register extends HttpServlet {
         String gender = request.getParameter("gender");
 
         // Hardcoded role
-        String role = "Admin";
+        String role = "Customer";
 
         // File upload logic
         Part filePart = request.getPart("photo");

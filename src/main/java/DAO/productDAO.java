@@ -125,18 +125,25 @@ public class productDAO {
     }
 
     // 5. Delete Product
-    public boolean deleteProduct(int id) {
-        String sql = "DELETE FROM products WHERE product_id = ?";
+    public boolean deleteProduct(int product_id) {
+        boolean result = false;
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            // Delete dependent rows first
+            PreparedStatement stmt1 = con.prepareStatement("DELETE FROM cart_product WHERE product_id = ?");
+            stmt1.setInt(1, product_id);
+            stmt1.executeUpdate();
+            
+            // Now delete the product
+            PreparedStatement stmt2 = con.prepareStatement("DELETE FROM products WHERE product_id = ?");
+            stmt2.setInt(1, product_id);
+            result = stmt2.executeUpdate() > 0;
 
-            int rows = ps.executeUpdate();
-            return rows > 0;
-        } catch (SQLException e) {
+            stmt1.close();
+            stmt2.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return result;
     }
     public List<Product> getProductsByCategory(int categoryId) {
         List<Product> productList = new ArrayList<>();
