@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2025 at 12:10 PM
+-- Generation Time: May 22, 2025 at 07:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,7 +38,11 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `cart_total_amount`) VALUES
-(1, 5, 3600);
+(1, 5, 13600),
+(2, 24, 13000),
+(3, 25, 20000),
+(4, 26, 2000),
+(5, 28, 3500);
 
 -- --------------------------------------------------------
 
@@ -58,7 +62,12 @@ CREATE TABLE `cart_product` (
 --
 
 INSERT INTO `cart_product` (`cart_item_id`, `cart_id`, `product_id`, `quantity`) VALUES
-(1, 1, 8, 3);
+(1, 1, 8, 3),
+(2, 1, 20, 1),
+(3, 2, 13, 1),
+(4, 2, 20, 1),
+(6, 4, 23, 1),
+(7, 5, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -130,12 +139,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `quantity`, `image`, `category_id`) VALUES
-(8, 'Banarasi sari', 'Multi color soft fabric sari  ', 1200, 10, 'download (4).jpeg', 1),
+(8, 'Banarasi Sari', 'Multi color soft fabric sari  ', 9000, 10, 'download (4).jpeg', 2),
 (13, 'silk saree', 'soft and light weight elegant saree in purple color', 3000, 2, 'saree.jpeg', 1),
-(16, 'cotton Sari', 'light weight', 500, 10, 'download (1).jpeg', 1),
-(17, 'Bridal saree ', 'heavy embroided red color saree', 20000, 1, 'download (6).jpeg', 1),
 (20, 'Red net lehenga', 'Heavy embroided lehenga', 10000, 1, 'Indian Wedding Lehenga.jpg', 2),
-(21, 'simple gown', 'beautiful gown with comfortable fabric', 2000, 6, 'ZAPAKASA Women Dark Green One Shoulder A-Line Ruched Long Bridesmaid Dress.jpg', 4);
+(23, 'lehnga', 'beautiful gown with comfortable fabric', 2000, 6, 'bright_maroon_silk_saree_for_wedding_17417615967305_copy.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -150,19 +157,27 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `address` varchar(50) NOT NULL,
-  `role` varchar(50) NOT NULL
+  `role` varchar(50) NOT NULL,
+  `user_name` varchar(50) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `photo` varchar(155) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `address`, `role`) VALUES
-(5, 'Riya', 'Nepali', 'riya@gmail.com', 'riya123', 'Pokhara', 'customer'),
-(6, 'Sarita', 'Gurung', 'sarita@gmail.com', 'sarita123', 'Newroad', 'customer'),
-(7, 'Aayusha', 'Basnet', 'aayusha@gmail.com', 'aaysuha123', 'Newroad', 'admin'),
-(8, 'john', 'doe', 'john@example.com', 'john123', 'Lakeside', 'customer'),
-(9, 'Asmita', 'Rana', 'john@example.com', 'ASmita123456!', 'Lakeside', 'customer');
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `address`, `role`, `user_name`, `phone_number`, `photo`, `dob`, `gender`) VALUES
+(5, 'Riya', 'Nepali', 'riya@gmail.com', 'riya123', 'Pokhara', 'customer', NULL, NULL, NULL, NULL, NULL),
+(23, 'Riya', 'Gaire', 'riya12@gmail.com', 'W+ZXKlXlMo+imIlqqdmZBhjswAYxs/a7MRNbOV0LX1w=', 'Pokhara riya', 'Admin', 'reeyu', '9876543213', 'capital one.jpg', '2010-02-02', 'Female'),
+(24, 'Asmita', 'Rana', 'rana@gmail.com', 'HLU1ELP1ldqFw4pLRLw53tDOkN4JuwJhU74E/pTx4JU=', 'rana', 'Customer', 'rana', '9999999999', 'Screenshot (57).png', '2025-05-01', 'Male'),
+(25, 'Kripa', 'Pandey', 'kripa@gmail.com', '1wXCc6ZMqwYSv5gR+iWi/A==', 'Malepatan', 'Customer', 'kripaaa', '9812345670', 'cc.jpg', '2003-06-10', 'Female'),
+(26, 'Sunita', 'Poudel', 'sunita@gmail.com', 'F39oEhMoHYVWcf/c9knQ4w==', 'Bindabasini', 'Customer', 'sunita12', '9804566667', 'capital one.jpg', '2009-02-10', 'Female'),
+(28, 'Diljit ', 'Pandey', 'abc@gmail.com', 'FPly/FuyDL9ipSu00eFj+w==', 'Pokhara', 'Admin', 'diljitp', '9876543210', 'cc.jpg', '2003-06-25', 'Male'),
+(30, 'Asmita', 'Rana Magar', 'rana9@gmail.com', 'uWZS3QWNfDKHQ0E9uO7+yw==', 'Pokhara', 'Customer', 'rana99r', '9847723045', 'Screenshot 2025-05-22 063756.png', '2025-05-03', 'Male'),
+(31, 'Rita', 'Pun', 'rita9@gmail.com', 'InO4HDxU1Rbk3NV2VMJ7aA==', 'Pokhara, Fulbari', 'Customer', 'Rita09', '9847723044', 'Screenshot 2025-05-22 063756.png', '2025-05-08', 'Male');
 
 --
 -- Indexes for dumped tables
@@ -214,7 +229,8 @@ ALTER TABLE `products`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -224,13 +240,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cart_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cart_product`
 --
 ALTER TABLE `cart_product`
-  MODIFY `cart_item_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cart_item_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -254,13 +270,13 @@ ALTER TABLE `order_product`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `product_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
